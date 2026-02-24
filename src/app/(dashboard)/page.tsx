@@ -18,6 +18,23 @@ type Section = {
   num_questions: number;
 };
 
+type Area = {
+  id: number;
+  section_id: number;
+};
+
+type Skill = {
+  id: number;
+  area_id: number;
+};
+
+type Question = {
+  id: number;
+  difficulty: string;
+  is_active: boolean;
+  skill_id: number;
+};
+
 export default function DashboardPage() {
   // Total de preguntas
   const { result: questionsResult, query: questionsQuery } = useList({
@@ -46,39 +63,36 @@ export default function DashboardPage() {
     meta: { select: "id, section_id" },
   });
 
-  const questions = questionsResult?.data ?? [];
-  const sections = sectionsResult?.data ?? [];
-  const skills = skillsResult?.data ?? [];
-  const areas = areasResult?.data ?? [];
+  const questions = (questionsResult?.data ?? []) as Question[];
+  const sections = (sectionsResult?.data ?? []) as Section[];
+  const skills = (skillsResult?.data ?? []) as Skill[];
+  const areas = (areasResult?.data ?? []) as Area[];
   const isLoading = questionsQuery.isLoading;
 
   // Calcular estadísticas
   const total = questions.length;
-  const active = questions.filter((q: any) => q.is_active).length;
+  const active = questions.filter((q) => q.is_active).length;
   const byDifficulty = {
-    easy: questions.filter((q: any) => q.difficulty === "easy").length,
-    medium: questions.filter((q: any) => q.difficulty === "medium").length,
-    hard: questions.filter((q: any) => q.difficulty === "hard").length,
+    easy: questions.filter((q) => q.difficulty === "easy").length,
+    medium: questions.filter((q) => q.difficulty === "medium").length,
+    hard: questions.filter((q) => q.difficulty === "hard").length,
   };
 
   // Contar preguntas por sección
-  const questionsBySection = sections.map((section: Section) => {
+  const questionsBySection = sections.map((section) => {
     // Encontrar áreas de esta sección
-    const sectionAreas = areas.filter((a: any) => a.section_id === section.id);
-    const areaIds = sectionAreas.map((a: any) => a.id);
+    const sectionAreas = areas.filter((a) => a.section_id === section.id);
+    const areaIds = sectionAreas.map((a) => a.id);
 
     // Encontrar skills de estas áreas
-    const sectionSkills = skills.filter((s: any) =>
-      areaIds.includes(s.area_id),
-    );
-    const skillIds = sectionSkills.map((s: any) => s.id);
+    const sectionSkills = skills.filter((s) => areaIds.includes(s.area_id));
+    const skillIds = sectionSkills.map((s) => s.id);
 
     // Contar preguntas de estos skills
-    const count = questions.filter((q: any) =>
-      skillIds.includes(q.skill_id),
-    ).length;
+    const count = questions.filter((q) => skillIds.includes(q.skill_id)).length;
 
     return {
+      id: section.id,
       name: section.name,
       current: count,
       target: section.num_questions || 30,
@@ -225,7 +239,7 @@ export default function DashboardPage() {
                       ? "bg-yellow-500"
                       : "bg-red-500";
                 return (
-                  <div key={section.name} className="space-y-1">
+                  <div key={section.id} className="space-y-1">
                     <div className="flex items-center justify-between text-sm">
                       <span className="font-medium">{section.name}</span>
                       <span className="text-muted-foreground">

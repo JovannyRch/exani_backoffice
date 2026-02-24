@@ -14,10 +14,16 @@ type Option = {
   text: string;
 };
 
+type OptionDB = {
+  key: string;
+  text: string;
+  image?: string | null;
+};
+
 export default function ShowQuestionPage() {
   const { id } = useParams<{ id: string }>();
 
-  const { data: question, isLoading, isError } = useOne({
+  const { result: questionResult, query: questionQuery } = useOne({
     resource: "questions",
     id,
     meta: {
@@ -26,39 +32,41 @@ export default function ShowQuestionPage() {
     },
   });
 
-  const { data: skillResult } = useList({
+  const { result: skillResult } = useList({
     resource: "skills",
-    filters: question?.data?.skill_id
-      ? [{ field: "id", operator: "eq", value: question.data.skill_id }]
+    filters: questionResult?.skill_id
+      ? [{ field: "id", operator: "eq", value: questionResult.skill_id }]
       : [],
     pagination: { pageSize: 1 },
     meta: { select: "id, name, code, area_id" },
-    queryOptions: { enabled: !!question?.data?.skill_id },
+    queryOptions: { enabled: !!questionResult?.skill_id },
   });
 
-  const { data: setResult } = useList({
+  const { result: setResult } = useList({
     resource: "question_sets",
-    filters: question?.data?.set_id
-      ? [{ field: "id", operator: "eq", value: question.data.set_id }]
+    filters: questionResult?.set_id
+      ? [{ field: "id", operator: "eq", value: questionResult.set_id }]
       : [],
     pagination: { pageSize: 1 },
     meta: { select: "id, name" },
-    queryOptions: { enabled: !!question?.data?.set_id },
+    queryOptions: { enabled: !!questionResult?.set_id },
   });
 
-  const data = question?.data;
+  const data = questionResult;
   const skill = skillResult?.data?.[0];
   const set = setResult?.data?.[0];
 
-  // Debug information
-  console.log('Question query:', {
-    isLoading,
+  // Debug logging
+  console.log("🔍 Debug Show Page:", {
+    id,
+    questionResult,
     data,
-    isError,
-    id
+    isLoading: questionQuery.isLoading,
+    isError: questionQuery.isError,
+    error: questionQuery.error,
   });
 
-  if (isLoading) {
+  if (questionQuery.isLoading) {
     return (
       <div className="space-y-6">
         <div className="flex items-center gap-4">
@@ -77,9 +85,10 @@ export default function ShowQuestionPage() {
     return (
       <div className="text-center py-8 space-y-4">
         <p className="text-muted-foreground">Pregunta no encontrada</p>
-        {isError && (
+        {questionQuery.isError && (
           <p className="text-xs text-destructive">
-            Error al cargar la pregunta
+            Error:{" "}
+            {questionQuery.error?.message || "Error al cargar la pregunta"}
           </p>
         )}
         <Button asChild variant="outline">
@@ -94,7 +103,7 @@ export default function ShowQuestionPage() {
   if (data.options_json) {
     if (Array.isArray(data.options_json)) {
       // Si ya es un array, puede tener el formato [{key, text, image}] o [{key, text}]
-      options = data.options_json.map((opt: any) => ({
+      options = data.options_json.map((opt: OptionDB) => ({
         key: opt.key,
         text: opt.text,
       }));
