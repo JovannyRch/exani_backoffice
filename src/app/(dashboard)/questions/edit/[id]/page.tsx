@@ -718,7 +718,10 @@ export default function EditQuestionPage() {
               {stem ? (
                 <div className="space-y-4">
                   <div className="prose prose-sm max-w-none">
-                    <MathText text={stem} className="text-sm whitespace-pre-wrap" />
+                    <MathText
+                      text={stem}
+                      className="text-sm whitespace-pre-wrap"
+                    />
                   </div>
 
                   {options.some((o) => o.text) && (
@@ -760,7 +763,10 @@ export default function EditQuestionPage() {
                       <h4 className="text-sm font-semibold mb-2">
                         Explicación:
                       </h4>
-                      <MathText text={explanation} className="text-sm text-muted-foreground whitespace-pre-wrap" />
+                      <MathText
+                        text={explanation}
+                        className="text-sm text-muted-foreground whitespace-pre-wrap"
+                      />
                     </div>
                   )}
 

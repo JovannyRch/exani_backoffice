@@ -15,13 +15,17 @@ Tu aplicación tiene la siguiente estructura jerárquica:
 El sistema soporta renderizado de fórmulas matemáticas usando notación LaTeX:
 
 ### Fórmulas en línea
+
 Usa `$formula$` para fórmulas dentro del texto:
+
 ```
 Calcula el valor de $x$ en la ecuación $2x + 5 = 15$
 ```
 
 ### Fórmulas en bloque
+
 Usa `$$formula$$` para fórmulas destacadas:
+
 ```
 Simplifique la siguiente expresión:
 
@@ -219,15 +223,15 @@ CONTEXTO ADICIONAL:
 
 EJEMPLO DE PREGUNTA CON LaTeX:
 {
-  "stem": "Simplifique: $$\\sqrt{\\frac{2^6 \\times 3^4}{2^2 \\times 3^2}}$$",
-  "options_json": [
-    {"key": "a", "text": "$144$"},
-    {"key": "b", "text": "$36$"},
-    {"key": "c", "text": "$12$"},
-    {"key": "d", "text": "$72$"}
-  ],
-  "correct_key": "b",
-  "explanation": "Aplicamos propiedades: $$\\sqrt{2^4 \\times 3^2} = \\sqrt{16 \\times 9} = 36$$"
+"stem": "Simplifique: $$\\sqrt{\\frac{2^6 \\times 3^4}{2^2 \\times 3^2}}$$",
+"options_json": [
+{"key": "a", "text": "$144$"},
+{"key": "b", "text": "$36$"},
+{"key": "c", "text": "$12$"},
+{"key": "d", "text": "$72$"}
+],
+"correct_key": "b",
+"explanation": "Aplicamos propiedades: $$\\sqrt{2^4 \\times 3^2} = \\sqrt{16 \\times 9} = 36$$"
 }
 
 ```

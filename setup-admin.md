@@ -184,3 +184,11 @@ Para verificar que todo funciona:
 2. Inicia sesión con las credenciales de admin
 3. Deberías ser redirigido al dashboard
 4. Intenta crear/editar contenido - solo funcionará si estás autenticado
+<!--
+Genera 15 preguntas completamente parseables para
+**Skill ID**: 2
+**Skill**: Hacer inferencias
+**Dificultad**: medium (puede ser "easy", "medium" o "hard")
+**Set ID**: 1
+Puedes ocupar Latex en las preguntas si lo crees necesario
+-->

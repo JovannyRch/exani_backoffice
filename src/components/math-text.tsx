@@ -41,7 +41,7 @@ function processLatex(text: string): string {
   if (!text) return "";
 
   let processed = text;
-  
+
   // Primero procesar bloques $$...$$ (fórmulas en bloque)
   processed = processed.replace(/\$\$(.*?)\$\$/g, (match, formula) => {
     try {
