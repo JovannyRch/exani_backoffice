@@ -10,6 +10,9 @@ import {
   Image,
   LogOut,
   Users,
+  FolderTree,
+  Layers,
+  Target,
 } from "lucide-react";
 import {
   Sidebar,
@@ -29,14 +32,20 @@ import { useGetIdentity, useLogout, usePermissions } from "@refinedev/core";
 const navItems = [
   { href: "/", label: "Dashboard", icon: Home },
   { href: "/questions", label: "Preguntas", icon: FileText },
-  { href: "/exams", label: "Estructura", icon: BookOpen },
+];
+
+const structureItems = [
+  { href: "/sections", label: "Secciones", icon: FolderTree },
+  { href: "/areas", label: "Áreas", icon: Layers },
+  { href: "/skills", label: "Skills", icon: Target },
+];
+
+const mediaItems = [
   { href: "/media", label: "Multimedia", icon: Image },
   { href: "/analytics", label: "Analíticas", icon: BarChart3 },
 ];
 
-const adminItems = [
-  { href: "/users", label: "Usuarios", icon: Users },
-];
+const adminItems = [{ href: "/users", label: "Usuarios", icon: Users }];
 
 type Identity = {
   name?: string;
@@ -70,10 +79,46 @@ export function AppSidebar() {
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Navegación</SidebarGroupLabel>
+          <SidebarGroupLabel>Principal</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {navItems.map((item) => (
+                <SidebarMenuItem key={item.href}>
+                  <SidebarMenuButton asChild isActive={isActive(item.href)}>
+                    <Link href={item.href}>
+                      <item.icon className="h-4 w-4" />
+                      <span>{item.label}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel>Estructura</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {structureItems.map((item) => (
+                <SidebarMenuItem key={item.href}>
+                  <SidebarMenuButton asChild isActive={isActive(item.href)}>
+                    <Link href={item.href}>
+                      <item.icon className="h-4 w-4" />
+                      <span>{item.label}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel>Recursos</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {mediaItems.map((item) => (
                 <SidebarMenuItem key={item.href}>
                   <SidebarMenuButton asChild isActive={isActive(item.href)}>
                     <Link href={item.href}>
@@ -118,8 +163,12 @@ export function AppSidebar() {
                 </AvatarFallback>
               </Avatar>
               <div className="flex-1 min-w-0">
-                <p className="text-xs font-medium truncate">{identity?.name ?? "Usuario"}</p>
-                <p className="text-xs text-muted-foreground truncate">{identity?.email}</p>
+                <p className="text-xs font-medium truncate">
+                  {identity?.name ?? "Usuario"}
+                </p>
+                <p className="text-xs text-muted-foreground truncate">
+                  {identity?.email}
+                </p>
               </div>
             </div>
           </SidebarMenuItem>

@@ -23,15 +23,6 @@ import {
 } from "@/components/ui/select";
 import { Plus, Search, Pencil, Trash2, Eye } from "lucide-react";
 
-const STATUS_LABELS: Record<string, { label: string; variant: "default" | "secondary" | "destructive" | "outline" }> = {
-  published: { label: "Publicada", variant: "default" },
-  approved: { label: "Aprobada", variant: "secondary" },
-  pending_review: { label: "En revisión", variant: "outline" },
-  draft: { label: "Borrador", variant: "outline" },
-  rejected: { label: "Rechazada", variant: "destructive" },
-  archived: { label: "Archivada", variant: "secondary" },
-};
-
 const DIFFICULTY_LABELS: Record<string, string> = {
   easy: "Fácil",
   medium: "Media",
@@ -40,16 +31,16 @@ const DIFFICULTY_LABELS: Record<string, string> = {
 
 export default function QuestionsPage() {
   const [search, setSearch] = useState("");
-  const [statusFilter, setStatusFilter] = useState("all");
   const [difficultyFilter, setDifficultyFilter] = useState("all");
   const [page, setPage] = useState(1);
 
   const filters = [];
-  if (statusFilter !== "all") {
-    filters.push({ field: "status", operator: "eq" as const, value: statusFilter });
-  }
   if (difficultyFilter !== "all") {
-    filters.push({ field: "difficulty", operator: "eq" as const, value: difficultyFilter });
+    filters.push({
+      field: "difficulty",
+      operator: "eq" as const,
+      value: difficultyFilter,
+    });
   }
 
   const { result, query } = useList({
@@ -57,7 +48,7 @@ export default function QuestionsPage() {
     pagination: { currentPage: page, pageSize: 20 },
     filters,
     sorters: [{ field: "created_at", order: "desc" }],
-    meta: { select: "id, stem, difficulty, status, created_at" },
+    meta: { select: "id, stem, difficulty, is_active, created_at" },
   });
 
   const { mutate: deleteQuestion } = useDelete();
@@ -91,20 +82,6 @@ export default function QuestionsPage() {
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-        <Select value={statusFilter} onValueChange={setStatusFilter}>
-          <SelectTrigger className="w-40">
-            <SelectValue placeholder="Estado" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">Todos los estados</SelectItem>
-            <SelectItem value="published">Publicadas</SelectItem>
-            <SelectItem value="approved">Aprobadas</SelectItem>
-            <SelectItem value="pending_review">En revisión</SelectItem>
-            <SelectItem value="draft">Borradores</SelectItem>
-            <SelectItem value="rejected">Rechazadas</SelectItem>
-            <SelectItem value="archived">Archivadas</SelectItem>
-          </SelectContent>
-        </Select>
         <Select value={difficultyFilter} onValueChange={setDifficultyFilter}>
           <SelectTrigger className="w-36">
             <SelectValue placeholder="Dificultad" />
@@ -125,7 +102,6 @@ export default function QuestionsPage() {
               <TableHead className="w-16">ID</TableHead>
               <TableHead>Pregunta</TableHead>
               <TableHead className="w-28">Dificultad</TableHead>
-              <TableHead className="w-32">Estado</TableHead>
               <TableHead className="w-32">Fecha</TableHead>
               <TableHead className="w-28 text-right">Acciones</TableHead>
             </TableRow>
@@ -133,64 +109,70 @@ export default function QuestionsPage() {
           <TableBody>
             {isLoading ? (
               <TableRow>
-                <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
+                <TableCell
+                  colSpan={5}
+                  className="text-center py-8 text-muted-foreground"
+                >
                   Cargando...
                 </TableCell>
               </TableRow>
             ) : questions.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
+                <TableCell
+                  colSpan={5}
+                  className="text-center py-8 text-muted-foreground"
+                >
                   No hay preguntas
                 </TableCell>
               </TableRow>
             ) : (
-              questions.map((q) => {
-                const statusKey = q.status as string;
-                const status = STATUS_LABELS[statusKey] ?? { label: statusKey, variant: "outline" as const };
-                return (
-                  <TableRow key={q.id as string}>
-                    <TableCell className="font-mono text-xs">{q.id as string}</TableCell>
-                    <TableCell className="max-w-xs">
-                      <p className="truncate text-sm">{q.stem as string}</p>
-                    </TableCell>
-                    <TableCell>
-                      <span className="text-sm">{DIFFICULTY_LABELS[q.difficulty as string] ?? (q.difficulty as string)}</span>
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant={status.variant}>{status.label}</Badge>
-                    </TableCell>
-                    <TableCell className="text-sm text-muted-foreground">
-                      {new Date(q.created_at as string).toLocaleDateString("es-MX")}
-                    </TableCell>
-                    <TableCell className="text-right">
-                      <div className="flex justify-end gap-1">
-                        <Button variant="ghost" size="icon" asChild>
-                          <Link href={`/questions/show/${q.id}`}>
-                            <Eye className="h-4 w-4" />
-                          </Link>
-                        </Button>
-                        <Button variant="ghost" size="icon" asChild>
-                          <Link href={`/questions/edit/${q.id}`}>
-                            <Pencil className="h-4 w-4" />
-                          </Link>
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          onClick={() =>
-                            deleteQuestion({
-                              resource: "questions",
-                              id: q.id as string,
-                            })
-                          }
-                        >
-                          <Trash2 className="h-4 w-4 text-destructive" />
-                        </Button>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                );
-              })
+              questions.map((q) => (
+                <TableRow key={q.id as string}>
+                  <TableCell className="font-mono text-xs">
+                    {q.id as string}
+                  </TableCell>
+                  <TableCell className="max-w-xs">
+                    <p className="truncate text-sm">{q.stem as string}</p>
+                  </TableCell>
+                  <TableCell>
+                    <span className="text-sm">
+                      {DIFFICULTY_LABELS[q.difficulty as string] ??
+                        (q.difficulty as string)}
+                    </span>
+                  </TableCell>
+                  <TableCell className="text-sm text-muted-foreground">
+                    {new Date(q.created_at as string).toLocaleDateString(
+                      "es-MX",
+                    )}
+                  </TableCell>
+                  <TableCell className="text-right">
+                    <div className="flex justify-end gap-1">
+                      <Button variant="ghost" size="icon" asChild>
+                        <Link href={`/questions/show/${q.id}`}>
+                          <Eye className="h-4 w-4" />
+                        </Link>
+                      </Button>
+                      <Button variant="ghost" size="icon" asChild>
+                        <Link href={`/questions/edit/${q.id}`}>
+                          <Pencil className="h-4 w-4" />
+                        </Link>
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() =>
+                          deleteQuestion({
+                            resource: "questions",
+                            id: q.id as string,
+                          })
+                        }
+                      >
+                        <Trash2 className="h-4 w-4 text-destructive" />
+                      </Button>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))
             )}
           </TableBody>
         </Table>
@@ -199,13 +181,24 @@ export default function QuestionsPage() {
       {total > 20 && (
         <div className="flex justify-between items-center text-sm text-muted-foreground">
           <span>
-            Mostrando {(page - 1) * 20 + 1}–{Math.min(page * 20, total)} de {total}
+            Mostrando {(page - 1) * 20 + 1}–{Math.min(page * 20, total)} de{" "}
+            {total}
           </span>
           <div className="flex gap-2">
-            <Button variant="outline" size="sm" onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={page === 1}>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              disabled={page === 1}
+            >
               Anterior
             </Button>
-            <Button variant="outline" size="sm" onClick={() => setPage((p) => p + 1)} disabled={page * 20 >= total}>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setPage((p) => p + 1)}
+              disabled={page * 20 >= total}
+            >
               Siguiente
             </Button>
           </div>

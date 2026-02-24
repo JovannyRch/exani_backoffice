@@ -17,6 +17,11 @@ export function Providers({ children }: { children: React.ReactNode }) {
         routerProvider={routerProvider}
         resources={[
           {
+            name: "dashboard",
+            list: "/",
+            meta: { label: "Dashboard", hide: true },
+          },
+          {
             name: "questions",
             list: "/questions",
             create: "/questions/create",
@@ -56,6 +61,11 @@ export function Providers({ children }: { children: React.ReactNode }) {
           syncWithLocation: true,
           warnWhenUnsavedChanges: true,
           liveMode: "auto",
+          redirect: {
+            afterCreate: false,
+            afterEdit: false,
+          },
+          disableTelemetry: true,
         }}
       >
         {children}
