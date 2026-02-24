@@ -1,0 +1,191 @@
+[
+  {
+    "correct_key": "b",
+    "difficulty": "easy",
+    "explanation": "Para encontrar el total, sumamos las manzanas que tenía (15) más las que compró (8): 15 + 8 = 23 manzanas. La opción 'a' es un error común de contar mal. La opción 'd' es resultado de restar en lugar de sumar.",
+    "is_active": true,
+    "options_json": [
+      {
+        "image": null,
+        "key": "a",
+        "text": "20 manzanas"
+      },
+      {
+        "image": null,
+        "key": "b",
+        "text": "23 manzanas"
+      },
+      {
+        "image": null,
+        "key": "c",
+        "text": "25 manzanas"
+      },
+      {
+        "image": null,
+        "key": "d",
+        "text": "7 manzanas"
+      }
+    ],
+    "set_id": 1,
+    "skill_id": 7,
+    "source": "Ejemplo EXANI 2026",
+    "stem": "Juan tiene 15 manzanas y compra 8 más. ¿Cuántas manzanas tiene en total?",
+    "tags_json": [
+      "aritmetica",
+      "suma",
+      "problemas_contextualizados"
+    ]
+  },
+  {
+    "correct_key": "b",
+    "difficulty": "medium",
+    "explanation": "Si 3/4 del dinero equivalen a $360, entonces 1/4 es $120 ($360 ÷ 3). El total es 4/4, por lo tanto: $120 × 4 = $480. La opción 'a' es 3/4 de $360. La opción 'c' suma incorrectamente. La opción 'd' multiplica por 3 en lugar de dividir.",
+    "is_active": true,
+    "options_json": [
+      {
+        "image": null,
+        "key": "a",
+        "text": "$270"
+      },
+      {
+        "image": null,
+        "key": "b",
+        "text": "$480"
+      },
+      {
+        "image": null,
+        "key": "c",
+        "text": "$540"
+      },
+      {
+        "image": null,
+        "key": "d",
+        "text": "$1,200"
+      }
+    ],
+    "set_id": 1,
+    "skill_id": 7,
+    "source": "Ejemplo EXANI 2026",
+    "stem": "María gastó 3/4 de sus ahorros en un libro que costó $360. ¿Cuánto dinero tenía ahorrado originalmente?",
+    "tags_json": [
+      "aritmetica",
+      "fracciones",
+      "dinero",
+      "proporciones"
+    ]
+  },
+  {
+    "correct_key": "b",
+    "difficulty": "medium",
+    "explanation": "La idea principal es el concepto que abarca todo el texto. Aunque se mencionan glaciares, agricultura y nivel del mar, todos son ejemplos de las consecuencias del cambio climático, que es el tema central. Las opciones 'a', 'c' y 'd' son detalles específicos mencionados en el texto, pero no la idea que los une a todos.",
+    "is_active": true,
+    "options_json": [
+      {
+        "image": null,
+        "key": "a",
+        "text": "Los glaciares se están derritiendo rápidamente"
+      },
+      {
+        "image": null,
+        "key": "b",
+        "text": "El cambio climático es un desafío con múltiples consecuencias globales"
+      },
+      {
+        "image": null,
+        "key": "c",
+        "text": "La agricultura está siendo afectada por el clima"
+      },
+      {
+        "image": null,
+        "key": "d",
+        "text": "El nivel del mar está aumentando"
+      }
+    ],
+    "set_id": 1,
+    "skill_id": 1,
+    "source": "Ejemplo EXANI 2026",
+    "stem": "Lee el siguiente fragmento:\n\n\"El cambio climático representa uno de los mayores desafíos de nuestro tiempo. El aumento de las temperaturas globales está provocando el derretimiento de los glaciares, elevando el nivel del mar y alterando los patrones de precipitación en todo el mundo. Estos cambios tienen consecuencias directas en la agricultura, la disponibilidad de agua potable y la biodiversidad del planeta.\"\n\n¿Cuál es la idea principal del texto?",
+    "tags_json": [
+      "comprension_lectora",
+      "idea_principal",
+      "texto_expositivo"
+    ]
+  },
+  {
+    "correct_key": "b",
+    "difficulty": "medium",
+    "explanation": "El sodio (metal) cede un electrón al cloro (no metal), formando iones Na⁺ y Cl⁻ que se atraen electrostáticamente. Este tipo de enlace se llama iónico y ocurre entre metales y no metales. El enlace covalente ocurre cuando se comparten electrones. El metálico es entre átomos metálicos. Los puentes de hidrógeno son interacciones débiles, no enlaces químicos primarios.",
+    "is_active": true,
+    "options_json": [
+      {
+        "image": null,
+        "key": "a",
+        "text": "Covalente no polar"
+      },
+      {
+        "image": null,
+        "key": "b",
+        "text": "Iónico"
+      },
+      {
+        "image": null,
+        "key": "c",
+        "text": "Metálico"
+      },
+      {
+        "image": null,
+        "key": "d",
+        "text": "Por puente de hidrógeno"
+      }
+    ],
+    "set_id": 1,
+    "skill_id": 14,
+    "source": "Ejemplo EXANI 2026",
+    "stem": "El enlace entre sodio (Na) y cloro (Cl) para formar sal de mesa (NaCl) es de tipo:",
+    "tags_json": [
+      "quimica",
+      "enlaces",
+      "enlace_ionico",
+      "compuestos"
+    ]
+  },
+  {
+    "correct_key": "a",
+    "difficulty": "hard",
+    "explanation": "Sea x el ancho. Entonces el largo es 3x. El perímetro es: 2(x + 3x) = 48, entonces 8x = 48, por lo tanto x = 6 cm (ancho). El largo es 3(6) = 18 cm. El área es: 6 × 18 = 108 cm². La opción 'b' multiplica el perímetro por 3. La opción 'c' es 4 veces el ancho al cuadrado. La opción 'd' es el largo al cuadrado.",
+    "is_active": true,
+    "options_json": [
+      {
+        "image": null,
+        "key": "a",
+        "text": "108 cm²"
+      },
+      {
+        "image": null,
+        "key": "b",
+        "text": "144 cm²"
+      },
+      {
+        "image": null,
+        "key": "c",
+        "text": "192 cm²"
+      },
+      {
+        "image": null,
+        "key": "d",
+        "text": "216 cm²"
+      }
+    ],
+    "set_id": 1,
+    "skill_id": 8,
+    "source": "Ejemplo EXANI 2026",
+    "stem": "Un rectángulo tiene un perímetro de 48 cm. Si el largo es el triple del ancho, ¿cuál es el área del rectángulo?",
+    "tags_json": [
+      "algebra",
+      "ecuaciones",
+      "geometria",
+      "perimetro",
+      "area"
+    ]
+  }
+]

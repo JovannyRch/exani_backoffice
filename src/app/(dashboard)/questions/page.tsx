@@ -5,7 +5,6 @@ import { useList, useDelete } from "@refinedev/core";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
 import {
   Table,
   TableBody,
@@ -21,7 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Plus, Search, Pencil, Trash2, Eye } from "lucide-react";
+import { Plus, Search, Pencil, Trash2, Eye, Upload } from "lucide-react";
 
 const DIFFICULTY_LABELS: Record<string, string> = {
   easy: "Fácil",
@@ -66,12 +65,20 @@ export default function QuestionsPage() {
           <h1 className="text-2xl font-bold">Preguntas</h1>
           <p className="text-muted-foreground">{total} preguntas en total</p>
         </div>
-        <Button asChild>
-          <Link href="/questions/create">
-            <Plus className="h-4 w-4 mr-2" />
-            Nueva pregunta
-          </Link>
-        </Button>
+        <div className="flex gap-2">
+          <Button variant="outline" asChild>
+            <Link href="/questions/import">
+              <Upload className="h-4 w-4 mr-2" />
+              Importar
+            </Link>
+          </Button>
+          <Button asChild>
+            <Link href="/questions/create">
+              <Plus className="h-4 w-4 mr-2" />
+              Nueva pregunta
+            </Link>
+          </Button>
+        </div>
       </div>
 
       <div className="flex gap-2 flex-wrap">
