@@ -6,16 +6,18 @@ import routerProvider from "@refinedev/nextjs-router";
 import { supabaseClient } from "@/lib/supabase";
 import { authProvider } from "@/lib/auth-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { Suspense } from "react";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <TooltipProvider>
-      <Refine
-        dataProvider={dataProvider(supabaseClient)}
-        liveProvider={liveProvider(supabaseClient)}
-        authProvider={authProvider}
-        routerProvider={routerProvider}
-        resources={[
+      <Suspense fallback={<div>Cargando...</div>}>
+        <Refine
+          dataProvider={dataProvider(supabaseClient)}
+          liveProvider={liveProvider(supabaseClient)}
+          authProvider={authProvider}
+          routerProvider={routerProvider}
+          resources={[
           {
             name: "dashboard",
             list: "/",
@@ -70,6 +72,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       >
         {children}
       </Refine>
+      </Suspense>
     </TooltipProvider>
   );
 }

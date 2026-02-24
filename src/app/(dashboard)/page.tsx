@@ -35,6 +35,8 @@ type Question = {
   skill_id: number;
 };
 
+export const dynamic = "force-dynamic";
+
 export default function DashboardPage() {
   // Total de preguntas
   const { result: questionsResult, query: questionsQuery } = useList({

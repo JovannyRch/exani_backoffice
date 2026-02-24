@@ -33,6 +33,8 @@ const areaSchema = z.object({
 
 type AreaForm = z.infer<typeof areaSchema>;
 
+export const dynamic = "force-dynamic";
+
 export default function EditAreaPage() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();

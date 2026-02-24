@@ -40,6 +40,8 @@ const SECTION_TYPES: Record<
   diagnostic: { label: "Diagnóstico", variant: "outline" },
 };
 
+export const dynamic = "force-dynamic";
+
 export default function SectionsPage() {
   const [search, setSearch] = useState("");
   const [examFilter, setExamFilter] = useState("all");

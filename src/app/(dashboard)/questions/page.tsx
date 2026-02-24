@@ -29,6 +29,8 @@ const DIFFICULTY_LABELS: Record<string, string> = {
   hard: "Difícil",
 };
 
+export const dynamic = "force-dynamic";
+
 export default function QuestionsPage() {
   const [search, setSearch] = useState("");
   const [difficultyFilter, setDifficultyFilter] = useState("all");

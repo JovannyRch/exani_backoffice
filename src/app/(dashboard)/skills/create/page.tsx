@@ -31,6 +31,8 @@ const skillSchema = z.object({
 
 type SkillForm = z.infer<typeof skillSchema>;
 
+export const dynamic = "force-dynamic";
+
 export default function CreateSkillPage() {
   const router = useRouter();
   const { mutate: createSkill, mutation } = useCreate();

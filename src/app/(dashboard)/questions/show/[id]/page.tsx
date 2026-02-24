@@ -20,6 +20,8 @@ type OptionDB = {
   image?: string | null;
 };
 
+export const dynamic = "force-dynamic";
+
 export default function ShowQuestionPage() {
   const { id } = useParams<{ id: string }>();
 

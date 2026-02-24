@@ -32,6 +32,8 @@ const skillSchema = z.object({
 
 type SkillForm = z.infer<typeof skillSchema>;
 
+export const dynamic = "force-dynamic";
+
 export default function EditSkillPage() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();

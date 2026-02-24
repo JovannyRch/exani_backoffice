@@ -44,6 +44,8 @@ type Option = {
   text: string;
 };
 
+export const dynamic = "force-dynamic";
+
 export default function EditQuestionPage() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();

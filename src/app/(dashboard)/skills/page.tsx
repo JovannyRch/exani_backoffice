@@ -31,6 +31,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
+export const dynamic = "force-dynamic";
+
 export default function SkillsPage() {
   const [search, setSearch] = useState("");
   const [areaFilter, setAreaFilter] = useState("all");

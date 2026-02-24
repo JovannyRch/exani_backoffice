@@ -42,6 +42,8 @@ type Option = {
   text: string;
 };
 
+export const dynamic = "force-dynamic";
+
 export default function CreateQuestionPage() {
   const router = useRouter();
   const { mutate: createQuestion, mutation } = useCreate();

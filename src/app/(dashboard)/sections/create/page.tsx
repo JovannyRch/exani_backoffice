@@ -31,6 +31,8 @@ const sectionSchema = z.object({
 
 type SectionForm = z.infer<typeof sectionSchema>;
 
+export const dynamic = "force-dynamic";
+
 export default function CreateSectionPage() {
   const router = useRouter();
   const { mutate: createSection, mutation } = useCreate();
