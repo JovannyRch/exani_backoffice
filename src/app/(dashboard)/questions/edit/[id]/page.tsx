@@ -24,6 +24,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowLeft, Plus, X, Eye } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { MathText } from "@/components/math-text";
 
 const questionSchema = z.object({
   stem: z.string().min(10, "El enunciado debe tener al menos 10 caracteres"),
@@ -717,7 +718,7 @@ export default function EditQuestionPage() {
               {stem ? (
                 <div className="space-y-4">
                   <div className="prose prose-sm max-w-none">
-                    <p className="text-sm whitespace-pre-wrap">{stem}</p>
+                    <MathText text={stem} className="text-sm whitespace-pre-wrap" />
                   </div>
 
                   {options.some((o) => o.text) && (
@@ -741,7 +742,9 @@ export default function EditQuestionPage() {
                             {option.key}
                           </div>
                           <p className="text-sm flex-1">
-                            {option.text || (
+                            {option.text ? (
+                              <MathText text={option.text} />
+                            ) : (
                               <span className="text-muted-foreground italic">
                                 Sin texto
                               </span>
@@ -757,9 +760,7 @@ export default function EditQuestionPage() {
                       <h4 className="text-sm font-semibold mb-2">
                         Explicación:
                       </h4>
-                      <p className="text-sm text-muted-foreground whitespace-pre-wrap">
-                        {explanation}
-                      </p>
+                      <MathText text={explanation} className="text-sm text-muted-foreground whitespace-pre-wrap" />
                     </div>
                   )}
 

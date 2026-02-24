@@ -10,6 +10,55 @@ Tu aplicación tiene la siguiente estructura jerárquica:
 - **Skills** → Agrupan preguntas específicas
 - **Preguntas** → Pertenecen a un skill y a un set
 
+## ✨ Fórmulas Matemáticas (LaTeX)
+
+El sistema soporta renderizado de fórmulas matemáticas usando notación LaTeX:
+
+### Fórmulas en línea
+Usa `$formula$` para fórmulas dentro del texto:
+```
+Calcula el valor de $x$ en la ecuación $2x + 5 = 15$
+```
+
+### Fórmulas en bloque
+Usa `$$formula$$` para fórmulas destacadas:
+```
+Simplifique la siguiente expresión:
+
+$$\sqrt{\frac{2^6 \times 3^4}{2^2 \times 3^2}}$$
+```
+
+### Ejemplos comunes
+
+- **Fracciones**: `$\frac{numerador}{denominador}$` → $\frac{3}{4}$
+- **Raíces**: `$\sqrt{x}$` o `$\sqrt[3]{x}$` → $\sqrt{x}$ o $\sqrt[3]{x}$
+- **Exponentes**: `$x^2$` o `$2^{10}$` → $x^2$ o $2^{10}$
+- **Subíndices**: `$x_1$` → $x_1$
+- **Multiplicación**: `$\times$` → $\times$
+- **División**: `$\div$` → $\div$
+- **Mayor/menor**: `$\geq$`, `$\leq$` → $\geq$, $\leq$
+- **Pi**: `$\pi$` → $\pi$
+- **Sumatorias**: `$\sum_{i=1}^{n}$` → $\sum_{i=1}^{n}$
+- **Integrales**: `$\int_{a}^{b}$` → $\int_{a}^{b}$
+
+### Ejemplo de pregunta con LaTeX
+
+```json
+{
+  "stem": "Simplifique la siguiente expresión aritmética:\n\n$$\\sqrt{\\frac{2^6 \\times 3^4}{2^2 \\times 3^2}}$$",
+  "options_json": [
+    { "key": "a", "text": "$144$" },
+    { "key": "b", "text": "$12$" },
+    { "key": "c", "text": "$36$" },
+    { "key": "d", "text": "$72$" }
+  ],
+  "correct_key": "c",
+  "explanation": "Aplicamos las propiedades de exponentes:\n\n$$\\sqrt{\\frac{2^6 \\times 3^4}{2^2 \\times 3^2}} = \\sqrt{2^{6-2} \\times 3^{4-2}} = \\sqrt{2^4 \\times 3^2} = \\sqrt{16 \\times 9} = \\sqrt{144} = 12 \\times 3 = 36$$"
+}
+```
+
+**Nota**: Escapa las barras invertidas en JSON con `\\` (ej: `\\sqrt` en lugar de `\sqrt`)
+
 ## 🎯 Skills Disponibles
 
 Tu base de datos tiene estos skills (actualizado al momento de exportar):
@@ -101,6 +150,10 @@ REQUISITOS:
 4. Incluir explicación detallada de por qué la respuesta es correcta
 5. Agregar 2-4 tags relevantes
 6. El formato debe ser EXACTAMENTE como el ejemplo abajo
+7. **IMPORTANTE**: Para preguntas de matemáticas, física o química, usa notación LaTeX:
+   - Fórmulas inline: `$formula$` (ej: `$x^2 + 5$`)
+   - Fórmulas en bloque: `$$formula$$` (ej: `$$\\frac{a}{b}$$`)
+   - Recuerda escapar las barras: `\\frac`, `\\sqrt`, `\\times`, etc.
 
 FORMATO JSON REQUERIDO:
 ```json
@@ -160,6 +213,22 @@ CONTEXTO ADICIONAL:
 - Incluye problemas contextualizados (situaciones reales)
 - Muestra las operaciones en la explicación
 - Los distractores deben ser errores comunes de cálculo
+- **USA NOTACIÓN LaTeX** para todas las fórmulas y expresiones matemáticas
+- Ejemplos: `$x^2 + 5x - 3$`, `$$\\frac{a+b}{c}$$`, `$\\sqrt{16}$`
+- Escapa barras: `\\frac`, `\\sqrt`, `\\times`, `\\div`, `\\pi`
+
+EJEMPLO DE PREGUNTA CON LaTeX:
+{
+  "stem": "Simplifique: $$\\sqrt{\\frac{2^6 \\times 3^4}{2^2 \\times 3^2}}$$",
+  "options_json": [
+    {"key": "a", "text": "$144$"},
+    {"key": "b", "text": "$36$"},
+    {"key": "c", "text": "$12$"},
+    {"key": "d", "text": "$72$"}
+  ],
+  "correct_key": "b",
+  "explanation": "Aplicamos propiedades: $$\\sqrt{2^4 \\times 3^2} = \\sqrt{16 \\times 9} = 36$$"
+}
 
 ```
 
@@ -172,6 +241,9 @@ CONTEXTO ADICIONAL:
 - Basar preguntas en conceptos fundamentales de bachillerato
 - Incluir aplicaciones prácticas
 - Los distractores deben ser conceptos erróneos comunes
+- **Usa LaTeX para fórmulas químicas y físicas**
+- Ejemplos: `$H_2O$`, `$F = ma$`, `$E = mc^2$`, `$\\Delta T$`
+- Superíndices: `$CO_2$`, subíndices: `$x_{1}$`
 
 ````
 

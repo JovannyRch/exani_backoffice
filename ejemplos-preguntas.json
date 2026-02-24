@@ -187,5 +187,43 @@
       "perimetro",
       "area"
     ]
+  },
+  {
+    "correct_key": "c",
+    "difficulty": "hard",
+    "explanation": "Aplicamos las propiedades de exponentes:\n\n$$\\sqrt{\\frac{2^6 \\times 3^4}{2^2 \\times 3^2}} = \\sqrt{2^{6-2} \\times 3^{4-2}} = \\sqrt{2^4 \\times 3^2}$$\n\nSimplificamos:\n\n$$\\sqrt{16 \\times 9} = \\sqrt{144} = 12$$\n\nPodemos verificar: $2^4 = 16$, $3^2 = 9$, y $16 \\times 9 = 144$, cuya raíz cuadrada es $12$.",
+    "is_active": true,
+    "options_json": [
+      {
+        "image": null,
+        "key": "a",
+        "text": "$36$"
+      },
+      {
+        "image": null,
+        "key": "b",
+        "text": "$144$"
+      },
+      {
+        "image": null,
+        "key": "c",
+        "text": "$12$"
+      },
+      {
+        "image": null,
+        "key": "d",
+        "text": "$72$"
+      }
+    ],
+    "set_id": 1,
+    "skill_id": 7,
+    "source": "Ejemplo EXANI 2026 - LaTeX",
+    "stem": "Simplifique la siguiente expresión aritmética:\n\n$$\\sqrt{\\frac{2^6 \\times 3^4}{2^2 \\times 3^2}}$$",
+    "tags_json": [
+      "aritmetica",
+      "exponentes",
+      "raices",
+      "simplificacion"
+    ]
   }
 ]

@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowLeft, Edit, CheckCircle2 } from "lucide-react";
+import { MathText } from "@/components/math-text";
 
 type Option = {
   key: string;
@@ -213,7 +214,7 @@ export default function ShowQuestionPage() {
           <CardTitle className="text-base">Enunciado</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="whitespace-pre-wrap">{data.stem}</p>
+          <MathText text={data.stem} className="whitespace-pre-wrap" />
         </CardContent>
       </Card>
 
@@ -244,7 +245,7 @@ export default function ShowQuestionPage() {
                   {option.key}
                 </div>
                 <div className="flex-1 pt-1">
-                  <p>{option.text}</p>
+                  <MathText text={option.text} />
                 </div>
                 {isCorrect && (
                   <CheckCircle2 className="h-5 w-5 text-green-600 shrink-0 mt-1" />
@@ -261,7 +262,7 @@ export default function ShowQuestionPage() {
           <CardTitle className="text-base">Explicación</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="whitespace-pre-wrap">{data.explanation}</p>
+          <MathText text={data.explanation} className="whitespace-pre-wrap" />
         </CardContent>
       </Card>
 
