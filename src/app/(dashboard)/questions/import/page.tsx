@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { useCreate } from "@refinedev/core";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -38,7 +37,6 @@ type Question = {
 };
 
 export default function ImportQuestionsPage() {
-  const router = useRouter();
   const { mutate: createQuestion } = useCreate();
 
   const [jsonInput, setJsonInput] = useState("");
@@ -183,12 +181,6 @@ export default function ImportQuestionsPage() {
 
     setImportResults(results);
     setIsImporting(false);
-
-    if (results.success > 0) {
-      setTimeout(() => {
-        router.push("/questions");
-      }, 3000);
-    }
   };
 
   const handleClear = () => {
